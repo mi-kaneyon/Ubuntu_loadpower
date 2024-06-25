@@ -64,8 +64,57 @@ chmod +x create_directories.sh
 python main.py
 ```
 
+# GUI instruction 
+[Test Image 3](maindisplay.png)
 
+- The "System power loading Tester" application provides a graphical interface for applying load to the CPU and GPU and monitoring system information. Below is a description of the interface and its controls:
 
+### Interface Overview
+![Main Display](maindisplay.png)
+
+### Controls
+
+1. **CPU Load (%)**
+   - **Slider**: Adjusts the percentage of load to apply to the CPU. 
+   - **Label**: Displays the current load percentage.
+
+2. **GPU Load (%)**
+   - **Slider**: Adjusts the percentage of load to apply to the GPU.
+   - **Label**: Displays the current load percentage.
+
+3. **GPU Load Type**
+   - **3D Rendering**: Select this option to apply a load using 3D rendering tasks.
+   - **Model Training**: Select this option to apply a load using machine learning model training tasks.
+
+4. **Apply Load**
+   - **Button**: Starts applying the specified load to the CPU and GPU based on the slider values and selected GPU load type.
+
+5. **Stop Load**
+   - **Button**: Stops the load tests and resets the load values to 0%.
+
+6. **Exit**
+   - **Button**: Closes the application.
+
+### Information Display
+
+- **CPU Information**
+  - Displays detailed information about the CPU, such as architecture, op-modes, address sizes, vendor ID, model name, etc.
+
+- **Real-time System Information**
+  - **CPU Usage**: Shows the current CPU usage percentage.
+  - **Memory Usage**: Shows the current memory usage percentage.
+  - **GPU Power Draw**: Shows the current power draw of the GPU in watts.
+
+### Usage Steps
+
+1. **Adjust CPU and GPU Load**: Use the sliders to set the desired load percentage for the CPU and GPU.
+2. **Select GPU Load Type**: Choose either "3D Rendering" or "Model Training" for the GPU load type.
+3. **Apply Load**: Click the "Apply Load" button to start the load tests.
+4. **Monitor System Information**: Observe the real-time updates in the information display section.
+5. **Stop Load**: Click the "Stop Load" button to stop the load tests and reset the load values.
+6. **Exit Application**: Click the "Exit" button to close the application.
+
+By following these steps, you can effectively use the "System power loading Tester" application to stress test your system and monitor its performance under load.
 
 
 
