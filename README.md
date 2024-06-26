@@ -42,8 +42,8 @@ Ubuntu_loadpower/
    git clone https://github.com/mi-kaneyon/Ubuntu_loadpower.git
 
    cd Ubuntu_loadpower
-
-  ```
+```
+  
 2. Install the required Python packages:
 
 ```sh
