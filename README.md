@@ -50,7 +50,7 @@ pip install -r requirements.txt
 3. Create the directory structure:
  
 ```sh
-chmod +x create_directories.sh 
+chmod +x create_directory.sh 
 ./create_directory.sh
 ```
 
