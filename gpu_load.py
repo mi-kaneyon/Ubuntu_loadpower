@@ -44,10 +44,10 @@ def draw_sphere(radius, slices, stacks):
     gluSphere(quadric, radius, slices, stacks)
     gluDeleteQuadric(quadric)
 
-def apply_gpu_load(load_percentage, stop_event):
+def apply_gpu_load(load_percentage, stop_event, gpu_id):
     pygame.init()
     screen = pygame.display.set_mode((800, 600), DOUBLEBUF | OPENGL)
-    pygame.display.set_caption("GPU Load Test")
+    pygame.display.set_caption(f"GPU Load Test (GPU {gpu_id})")
 
     glEnable(GL_DEPTH_TEST)
     texture_id = load_texture()
@@ -69,9 +69,9 @@ def apply_gpu_load(load_percentage, stop_event):
         # Draw multiple spheres
         if texture_id:
             glBindTexture(GL_TEXTURE_2D, texture_id)
-        glColor3f(1.0, 0.0, 0.0)  # 球体の色を赤に設定
+        glColor3f(1.0, 0.0, 0.0)  # Set sphere color to red
 
-        for i in range(10):  # 複数の球体を描画
+        for i in range(10):  # Draw multiple spheres
             glPushMatrix()
             glTranslatef(np.random.uniform(-2, 2), np.random.uniform(-2, 2), np.random.uniform(-2, 2))
             draw_sphere(0.5, 50, 50)
@@ -80,19 +80,22 @@ def apply_gpu_load(load_percentage, stop_event):
         rotation_angle += 1
 
         pygame.display.flip()
-        time.sleep(0.01)  # 少しの待機時間を入れる
+        time.sleep(0.01)  # Add a slight delay
 
-def tensor_calculation(load_percentage, stop_event):
+def tensor_calculation(load_percentage, stop_event, gpu_id):
+    torch.cuda.set_device(gpu_id)
     while not stop_event.is_set():
-        a = torch.rand((10000, 10000), device='cuda')  # 計算量を増やす
-        b = torch.rand((10000, 10000), device='cuda')  # 計算量を増やす
+        a = torch.rand((10000, 10000), device='cuda')  # Increase calculation load
+        b = torch.rand((10000, 10000), device='cuda')  # Increase calculation load
         c = torch.matmul(a, b)
         torch.cuda.synchronize()
         time.sleep(1 / load_percentage)
 
-def apply_gpu_tensor_load(load_percentage, stop_event):
-    threading.Thread(target=tensor_calculation, args=(load_percentage, stop_event), daemon=True).start()
+def apply_gpu_tensor_load(load_percentage, stop_event, gpu_ids):
+    for gpu_id in gpu_ids:
+        threading.Thread(target=tensor_calculation, args=(load_percentage, stop_event, gpu_id), daemon=True).start()
 
-def apply_combined_load(load_percentage, stop_event):
-    threading.Thread(target=tensor_calculation, args=(load_percentage, stop_event), daemon=True).start()
-    apply_gpu_load(load_percentage, stop_event)
+def apply_combined_load(load_percentage, stop_event, gpu_ids):
+    for gpu_id in gpu_ids:
+        threading.Thread(target=tensor_calculation, args=(load_percentage, stop_event, gpu_id), daemon=True).start()
+        threading.Thread(target=apply_gpu_load, args=(load_percentage, stop_event, gpu_id), daemon=True).start()
