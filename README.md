@@ -37,7 +37,8 @@ Ubuntu_loadpower/
 ## Setup and Installation
 
 1. **Clone the repository:**
-   ```sh
+ 
+   ```
    git clone https://github.com/mi-kaneyon/Ubuntu_loadpower.git
 
    cd Ubuntu_loadpower
