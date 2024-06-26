@@ -38,7 +38,8 @@ Ubuntu_loadpower/
 
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/Manyan3/Ubuntu_loadpower.git
+   git clone https://github.com/mi-kaneyon/Ubuntu_loadpower.git
+
    cd Ubuntu_loadpower
   ```
 2. Install the required Python packages:
@@ -50,7 +51,7 @@ pip install -r requirements.txt
  
 ```sh
 chmod +x create_directories.sh 
-./create_directories.sh
+./create_directory.sh
 ```
 
 4. Place the respective script files in the appropriate directories:
