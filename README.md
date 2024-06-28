@@ -4,6 +4,9 @@
 ## Overview
 Ubuntu_loadpower is a tool designed to stress test the system's CPU and GPU on Ubuntu. It provides a graphical interface to apply different levels of load to the CPU and GPU, allowing users to monitor the system's power consumption and performance under stress.
 
+## updated
+- multi GPU/CPU usage
+
 ## Features
 - CPU load test using matrix multiplication for maximum stress.
 - GPU load test with options for 3D rendering and machine learning model training.
