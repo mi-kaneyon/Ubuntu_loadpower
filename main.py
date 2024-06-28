@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from cpu_load.cpu_load import apply_cpu_load
+from cpu_load.cpu_load import apply_cpu_load  # 修正: apply_cpu_loadを正しくインポート
 from gpu_load.gpu_load import apply_gpu_tensor_load, apply_combined_load
 from system_info.system_info import get_cpu_info, get_gpu_info, get_psu_power
 import threading
