@@ -10,13 +10,13 @@ def cpu_tensor_calculation(load_percentage, stop_event):
         time.sleep(1 / load_percentage)
 
 def apply_cpu_load(load_percentage, stop_event):
-    num_threads = torch.get_num_threads()  # 使用可能なスレッド数を取得
+    num_threads = torch.get_num_threads()  # available cpu core
     threads = []
     
     for _ in range(num_threads):
         thread = threading.Thread(target=cpu_tensor_calculation, args=(load_percentage, stop_event), daemon=True)
         threads.append(thread)
         thread.start()
-    
-    for thread in threads:
-        thread.join()
+
+    # To avoid main thread starting / waiting timing
+    # not necessary to wait thread
