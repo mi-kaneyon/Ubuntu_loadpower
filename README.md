@@ -79,7 +79,7 @@ python main.py
 - The "System power loading Tester" application provides a graphical interface for applying load to the CPU and GPU and monitoring system information. Below is a description of the interface and its controls:
 
 ### Interface Overview
-![Main Display](maindisplay.png)
+![Main Display](maindisplay2.png)
 
 ### Controls
 
