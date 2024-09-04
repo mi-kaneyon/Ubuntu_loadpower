@@ -127,5 +127,14 @@ By following these steps, you can effectively use the "System power loading Test
 
 
 
+# Option -- 2D/3D benchmark
 
+```
+python grapshtest.py
+```
+
+- Preparing texture.jpg for 2D bench
+- 3D image is not necessary (script itself genrate figure)
+
+  
 
