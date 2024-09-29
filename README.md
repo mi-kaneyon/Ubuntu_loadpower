@@ -9,6 +9,12 @@ Ubuntu_loadpower is a tool designed to stress test the system's CPU and GPU on U
 ## updated
 - multi GPU/CPU usage
 
+> [!NOTE]
+> If you need to simple check, access this repository
+
+https://github.com/mi-kaneyon/simple_stresschecker
+
+
 ## Features
 - CPU load test using matrix multiplication for maximum stress.
 - GPU load test with options for 3D rendering and machine learning model training.
