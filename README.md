@@ -40,7 +40,7 @@ Ubuntu_loadpower/
 │ └── system_info.py
 ├── main.py
 ├── create_directories.sh
-├── lin_beninstall.sh
+│
 └── requirements.txt
 
 ```
