@@ -1,4 +1,8 @@
 # Ubuntu_loadpower
+
+> [!NOTE]
+> Load power will be updated system test suits such as package software.
+
 - CUDA based(GPU)
 - **New** VRAM Usage 
 - CPU x86 based
@@ -143,4 +147,79 @@ python grapshtest.py
 - 3D image is not necessary (script itself genrate figure)
 
   
+# New Project (proto type)
+## USB port access bench 
+
+command line
+
+```
+python storage.py 
+```
+
+### sample result
+
+
+```
+python storage.py 
+Testing storage device mounted at: /media/manyan3/EA42-CF3C
+Testing non-storage device: Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Testing non-storage device: Bus 001 Device 005: ID 0930:6544 Toshiba Corp. TransMemory-Mini / Kingston DataTraveler 2.0 Stick
+Testing non-storage device: Bus 001 Device 003: ID 5986:211b Acer, Inc HD Webcam
+Testing non-storage device: Bus 001 Device 004: ID 8087:0026 Intel Corp. AX201 Bluetooth
+Testing non-storage device: Bus 001 Device 002: ID 04d9:a31c Holtek Semiconductor, Inc. USB Gaming Mouse
+Testing non-storage device: Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Couldn't open device, some information will be missing
+Couldn't open device, some information will be missing
+Couldn't open device, some information will be missing
+Couldn't open device, some information will be missing
+Couldn't open device, some information will be missing
+Couldn't open device, some information will be missing
+                                                                                
+Summary for /media/manyan3/EA42-CF3C: 252 successes, 0 failures<00:14,  1.05s/s]
+Non-Storage Test on 0930:6544:  95%|██████████▍| 286/300 [04:59<00:14,  1.05s/s]
+Summary for 8087:0026: 286 successes, 0 failures 286/300 [04:59<00:14,  1.05s/s]
+USB Info:ge Test on 8087:0026:  95%|██████████▍| 286/300 [04:59<00:14,  1.05s/s]
+  bcdUSB               2.011c:  95%|██████████▍| 286/300 [04:59<00:14,  1.05s/s]
+  bDeviceClass          224 Wireless                                            
+  iProduct                0 
+
+
+Summary for 1d6b:0003: 286 successes, 0 failures                                
+USB Info:
+  bcdUSB               3.10
+  bDeviceClass            9 Hub
+  iProduct                2 xHCI Host Controller
+
+
+Summary for 04d9:a31c: 286 successes, 0 failures
+USB Info:
+  bcdUSB               2.00
+  bDeviceClass            0 
+  iProduct                2 USB Gaming Mouse                                    
+
+
+Summary for 1d6b:0002: 286 successes, 0 failures
+USB Info:
+  bcdUSB               2.00
+  bDeviceClass            9 Hub
+  iProduct                2 xHCI Host Controller
+                                                                                
+
+Summary for 0930:6544: 286 successes, 0 failures
+USB Info:                                                                       
+  bcdUSB               2.00
+  bDeviceClass            0 
+  iProduct                2 TransMemory
+
+
+Summary for 5986:211b: 286 successes, 0 failures
+USB Info:
+  bcdUSB               2.01                                                     
+  bDeviceClass          239 Miscellaneous Device
+  iProduct                2 HD Webcam
+
+
+```
+
+
 
