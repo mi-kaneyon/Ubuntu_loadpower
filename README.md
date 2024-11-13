@@ -156,6 +156,10 @@ python grapshtest.py
 - Preparing texture.jpg for 2D bench
 - 3D image is not necessary (script itself genrate figure)
 
+# storage test view
+
+![Main Display](storagetest.png)
+
   
 # New Project (proto type)
 ## USB port access bench 
