@@ -1,4 +1,14 @@
 # Ubuntu_loadpower
+> [!NOTE]
+> Update！ ver 0.11(0.1 is initial release)
+> Implemented USB device test (storage test) mode
+
+## Updated and added 
+- main.py
+- create_directory.sh
+- storage_test.py
+
+
 
 > [!NOTE]
 > Load power will be updated system test suits such as package software.
