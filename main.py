@@ -14,6 +14,12 @@ import random
 import string
 import hashlib
 from concurrent.futures import ThreadPoolExecutor
+import sys
+sys.path.append(os.path.join(os.path.dirname(__file__), "gpu_load"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "cpu_load"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "storage_load"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "system_info"))
+
 
 # Circular import solution - move StorageTestApp import inside the relevant function
 class LoadTestApp:
