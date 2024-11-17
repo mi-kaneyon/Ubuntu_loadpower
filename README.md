@@ -3,8 +3,9 @@
 > Update！ ver 0.11(0.1 is initial release)
 > Implemented USB device test (storage test) mode
 
-## Updated and added 
-- main.py
+## Updated and added (18th Nov)
+- main.py codes
+- 3D GPU test texture is renewed
 - create_directory.sh
 - storage_test.py
 
