@@ -23,4 +23,3 @@ echo "2. cpu_load.py has been moved to lin_bench/cpu_load directory."
 echo "3. gpu_load.py has been moved to lin_bench/gpu_load directory."
 echo "4. system_info.py has been moved to lin_bench/system_info directory."
 echo "5. storage_test.py has been moved to lin_bench/storage_load directory."
-
