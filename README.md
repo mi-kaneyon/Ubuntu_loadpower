@@ -9,6 +9,7 @@
 - 3D GPU test texture is renewed
 - create_directory.sh
 - storage_test.py
+- cpu_load.py is replaced x86 test type and bug fix
 
 
 
