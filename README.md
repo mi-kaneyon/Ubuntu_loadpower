@@ -4,7 +4,7 @@
 > Implemented USB device test (storage test) mode
 > CPU loading test is revised to test multi function
 
-## Updated and added (18th Nov)
+## Updated and added (28th Nov)
 - main.py codes
 - 3D GPU test texture is renewed
 - create_directory.sh
