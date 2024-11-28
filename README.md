@@ -1,7 +1,8 @@
 # Ubuntu_loadpower
 > [!NOTE]
-> Update！ ver 0.11(0.1 is initial release)
+> Update！ ver 0.12(0.1 is initial release)
 > Implemented USB device test (storage test) mode
+> CPU loading test is revised to test multi function
 
 ## Updated and added (18th Nov)
 - main.py codes
@@ -16,7 +17,7 @@
 
 - CUDA based(GPU)
 - **New** VRAM Usage 
-- CPU x86 based
+- CPU x86 based---> binary changed
 - avoiding shutdown
 ## Overview
 Ubuntu_loadpower is a tool designed to stress test the system's CPU and GPU on Ubuntu. It provides a graphical interface to apply different levels of load to the CPU and GPU, allowing users to monitor the system's power consumption and performance under stress.
@@ -100,7 +101,7 @@ python main.py
 - The "System power loading Tester" application provides a graphical interface for applying load to the CPU and GPU and monitoring system information. Below is a description of the interface and its controls:
 
 ### Interface Overview
-![Main Display](maindisplay2.png)
+![Main Display](maindisplay3.png)
 
 ### Controls
 
