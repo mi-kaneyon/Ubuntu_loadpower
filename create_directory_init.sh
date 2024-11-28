@@ -12,6 +12,7 @@ mkdir -p lin_bench/storage_load
 # Move files to respective directories
 mv main.py lin_bench/
 mv cpu_load.py lin_bench/cpu_load/
+mv mixed_load　lin_bench/cpu_load/
 mv gpu_load.py lin_bench/gpu_load/
 mv system_info.py lin_bench/system_info/
 mv storage_test.py lin_bench/storage_load/
