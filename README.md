@@ -1,8 +1,15 @@
 # Ubuntu_loadpower
 > [!NOTE]
-> Update！ ver 0.12(0.1 is initial release)
+> Update！ ver 0.14(0.1 is initial release)
 > Implemented USB device test (storage test) mode
 > CPU loading test is revised to test multi function
+> This update improved GPU/VRAM test function
+
+## Updated and added (29th Jan 2025)
+- Replacing the script "gpu_load.py"
+- Improved VRAM loading test with GPU loading test combination
+- bug fix shut down the script due to the exception code
+
 
 ## Updated and added (28th Nov)
 - main.py codes
