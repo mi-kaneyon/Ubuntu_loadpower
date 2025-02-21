@@ -5,6 +5,13 @@
 > CPU loading test is revised to test multi function
 > This update improved GPU/VRAM test function
 
+## Updated and added (21th Feb 2025)
+- Adding the script "noisetester.py" from soundtester repository
+
+https://github.com/mi-kaneyon/soundtester
+
+![Main Display2](2025Feb_soundtest.png)
+
 ## Updated and added (29th Jan 2025)
 - Replacing the script "gpu_load.py"
 - Improved VRAM loading test with GPU loading test combination
