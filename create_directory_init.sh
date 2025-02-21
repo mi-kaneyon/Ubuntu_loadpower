@@ -1,26 +1,30 @@
 #!/bin/bash
+# setup.sh
+# This script creates the required subdirectories and __init__.py files
+# for the GitHub repository after cloning.
 
-# Create main directory
-mkdir -p lin_bench
+# List of subdirectories to create
+dirs=(
+  "lin_bench/cpu_load"
+  "lin_bench/gpu_load"
+  "lin_bench/old_version"
+  "lin_bench/sound_test"
+  "lin_bench/storage_load"
+  "lin_bench/system_info"
+)
 
-# Create subdirectories
-mkdir -p lin_bench/cpu_load
-mkdir -p lin_bench/gpu_load
-mkdir -p lin_bench/system_info
-mkdir -p lin_bench/storage_load
+echo "Creating required directories..."
 
-# Move files to respective directories
-mv main.py lin_bench/
-mv cpu_load.py lin_bench/cpu_load/
-mv mixed_load　lin_bench/cpu_load/
-mv gpu_load.py lin_bench/gpu_load/
-mv system_info.py lin_bench/system_info/
-mv storage_test.py lin_bench/storage_load/
+for dir in "${dirs[@]}"; do
+  mkdir -p "$dir"
+  echo "Directory created or already exists: $dir"
+  init_file="$dir/__init__.py"
+  if [ ! -f "$init_file" ]; then
+    echo "# This file makes this directory a Python package." > "$init_file"
+    echo "__init__.py created in $dir"
+  else
+    echo "__init__.py already exists in $dir"
+  fi
+done
 
-# Output status
-echo "Directory structure has been created and files have been moved to their respective directories:"
-echo "1. main.py has been moved to lin_bench directory."
-echo "2. cpu_load.py has been moved to lin_bench/cpu_load directory."
-echo "3. gpu_load.py has been moved to lin_bench/gpu_load directory."
-echo "4. system_info.py has been moved to lin_bench/system_info directory."
-echo "5. storage_test.py has been moved to lin_bench/storage_load directory."
+echo "All subdirectories and __init__.py files have been set up."
