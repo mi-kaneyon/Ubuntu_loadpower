@@ -12,6 +12,10 @@ https://github.com/mi-kaneyon/soundtester
 
 ![Main Display2](2025Feb_soundtest.png)
 
+## Updated and added (11th Mar 2025)
+- revised soundtest routine
+- storage 
+
 ## Updated and added (29th Jan 2025)
 - Replacing the script "gpu_load.py"
 - Improved VRAM loading test with GPU loading test combination
