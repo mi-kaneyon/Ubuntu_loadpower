@@ -5,6 +5,13 @@
 > CPU loading test is revised to test multi function
 > This update improved GPU/VRAM test function
 
+> [!TIP]
+> ROCm/CUDA hybrid version is below.
+> This Ubuntu_loadpower will be updated soon!
+> Ubuntu_loadpower is available to utilize CUDA based frame work only.
+
+https://github.com/mi-kaneyon/rocmcuda-powerloader 
+
 ## Updated and added (21th Feb 2025)
 - Adding the script "noisetester.py" from soundtester repository
 
