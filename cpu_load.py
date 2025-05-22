@@ -1,74 +1,98 @@
-import subprocess
+#!/usr/bin/env python3
+"""
+cpu_load.py  ―  Burn-in／単独負荷用　CPU ストレステスト
+  ・multiprocessing.Event で停止シグナルを安全に共有
+  ・優先度を下げて OS 応答性を確保
+"""
+
 import os
-import multiprocessing
+import subprocess
 import time
+from multiprocessing import Event, Process, cpu_count
 
-# x86命令を使ったCPU負荷テスト
-def apply_cpu_load_x86(load_percentage, stop_event):
+# ────────────────────────────────────────────────────────────
+# 1) x86 アセンブラ版 (外部バイナリ mixed_load を呼ぶ)
+# ────────────────────────────────────────────────────────────
+def apply_cpu_load_x86(load_percentage: int, stop_event: Event, modulate: bool = False):
     binary_path = os.path.join(os.path.dirname(__file__), "mixed_load")
+    if not (os.path.exists(binary_path) and os.access(binary_path, os.X_OK)):
+        print("[ERROR] mixed_load binary not found or not executable"); return
 
-    if not os.path.isfile(binary_path):
-        print("[ERROR] 'mixed_load' binary not found. Make sure it is compiled and in the correct directory.")
-        return
+    def worker(evt: Event):
+        # 各プロセス：優先度を下げる
+        try: os.nice(10)
+        except Exception as e: print(f"[WARN] nice() failed: {e}")
 
-    if not os.access(binary_path, os.X_OK):
-        os.chmod(binary_path, 0o755)
+        while not evt.is_set():
+            proc = subprocess.Popen(
+                [binary_path, str(load_percentage)],
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+            )
+            # 0.2 秒ごとに停止判定
+            interval = 0.2 * (2 if modulate else 1)
+            while not evt.is_set() and proc.poll() is None:
+                time.sleep(interval)
 
-    def cpu_load_task(stop_event):
+            # 終了処理
+            if proc.poll() is None:
+                proc.terminate(); proc.wait()
+            time.sleep(0.5 * (2 if modulate else 1))
+
+    _launch_processes(worker, stop_event)
+
+
+# ────────────────────────────────────────────────────────────
+# 2) 純 Python 計算版
+# ────────────────────────────────────────────────────────────
+def apply_cpu_load(load_percentage: int, stop_event: Event, modulate: bool = False):
+    work_ratio = load_percentage / 100.0
+    interval   = 0.1                       # 100 ms スライス
+    work_time  = interval * work_ratio
+    idle_time  = interval - work_time
+
+    def worker(evt: Event):
         try:
-            while not stop_event.is_set():
-                process = subprocess.Popen([binary_path, str(load_percentage)], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                
-                while not stop_event.is_set() and process.poll() is None:
-                    time.sleep(0.1)  # ストップイベントのチェック
+            while not evt.is_set():
+                t0 = time.perf_counter()
+                # busy loop で work_time だけ回す
+                while (time.perf_counter() - t0) < work_time and not evt.is_set():
+                    pass
+                # 残り時間はスリープ
+                time.sleep(max(0, idle_time) * (2 if modulate else 1))
+        except KeyboardInterrupt:
+            pass
 
-                if process.poll() is None:
-                    process.terminate()
-                    process.wait()
-        except subprocess.CalledProcessError as e:
-            print(f"[ERROR] Failed to execute '{binary_path}'. Error: {e}")
+    _launch_processes(worker, stop_event)
 
-    num_processes = os.cpu_count()
-    print(f"[DEBUG] Launching {num_processes} processes to apply x86 load.")
-    processes = []
 
-    for _ in range(num_processes):
-        process = multiprocessing.Process(target=cpu_load_task, args=(stop_event,))
-        processes.append(process)
-        process.start()
+# ────────────────────────────────────────────────────────────
+# 共通：プロセス起動＆停止監視
+# ────────────────────────────────────────────────────────────
+def _launch_processes(target, stop_event: Event):
+    n_proc = cpu_count() or 1
+    print(f"[DEBUG] Launching {n_proc} CPU-load processes")
+    procs: list[Process] = [Process(target=target, args=(stop_event,)) for _ in range(n_proc)]
+    for p in procs: p.start()
 
-    stop_event.wait()
-
-    # 全てのプロセスを終了する
-    for process in processes:
-        if process.is_alive():
-            process.terminate()
-        process.join()
-
-# 通常のCPU負荷テスト
-def apply_cpu_load(load_percentage, stop_event):
-    def cpu_intensive_task(stop_event):
+    try:
         while not stop_event.is_set():
-            # 大量の計算を行うことでCPU負荷をかける
-            for _ in range(5000):
-                _ = [i ** 2 for i in range(1000)]
-            if stop_event.is_set():
-                break
-            time.sleep(0.01)
+            time.sleep(0.5)
+    except KeyboardInterrupt:
+        stop_event.set()
 
-    num_processes = os.cpu_count()
-    print(f"[DEBUG] Launching {num_processes} processes to apply CPU load.")
-    processes = []
+    # 終了待ち
+    for p in procs:
+        if p.is_alive(): p.terminate()
+        p.join()
 
-    for _ in range(num_processes):
-        process = multiprocessing.Process(target=cpu_intensive_task, args=(stop_event,))
-        processes.append(process)
-        process.start()
 
-    stop_event.wait()
-
-    # 全てのプロセスを終了する
-    for process in processes:
-        if process.is_alive():
-            process.terminate()
-        process.join()
+# ────────────────────────────────────────────────────────────
+# テスト実行
+# ────────────────────────────────────────────────────────────
+if __name__ == "__main__":
+    evt = Event()
+    try:
+        apply_cpu_load(70, evt)           # 70 % 負荷を手動テスト
+    finally:
+        evt.set()
+        print("Stopped.")
